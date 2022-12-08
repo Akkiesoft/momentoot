@@ -1,0 +1,36 @@
+<!--適当にTogetterのデザインをパクった-->
+<style>
+a { text-decoration: none; }
+article {
+    position: relative;
+    font: 13px sans-serif;
+    padding-left: 53px;
+}
+.profile { color: #999; }
+.profile img {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    width: 48px;
+    height: 48px;
+}
+.acct { font-size: 12px; margin-left: 1em; }
+.created_at { font-size: 12px; align: right; color: #999; }
+</style>
+
+<article>
+    <div>
+        <a class="profile" href="{{ item.account.url }}">
+            <img src="{{ item.account.icon }}" alt="{{ item.account.display_name }}">
+            <strong>{{ item.account.display_name }}</strong>
+            <span class="acct">@{{ item.account.acct }}@domain(JSONにドメインだけなくてだりー)</span>
+        </a>   
+    </div>
+    {{ item.content }}
+    {% for i in item.media_attachments %}
+    <div class="image">
+        <a href="{{ i.url }}"><img src="{{ i.preview_url }}" alt={{ i.description }}></a>
+    </div>
+    {% endfor %}
+    <div class="created_at">{{ item.created_at }}</div>
+</article>
