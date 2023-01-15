@@ -23,14 +23,36 @@ def generate_html(j):
     print(content)
     return content
 
-html_body = ""
+toots = []
 
 list_file = sys.argv[-1]
 with open(list_file, 'r') as f:
-    toot_urls = f.readlines()
-for url in toot_urls:
+    toot_data = f.readlines()
+
+info = {
+    'title': toot_data[0].replace("\n", ""),
+    'description': toot_data[1].replace("\n", ""),
+    'author_icon': toot_data[2].replace("\n", ""),
+    'author_url': toot_data[3].replace("\n", ""),
+    'author': toot_data[4].replace("\n", ""),
+    'last_update': toot_data[5].replace("\n", ""),
+}
+
+for url in toot_data[6:]:
     toot_url = url.replace("\n", "").split('/')
     json_url = "%s//%s/api/v1/statuses/%s" % (toot_url[0],toot_url[2],toot_url[4])
     with urllib.request.urlopen(json_url) as r:
-        json_data = json.loads(r.read())
-    html_body += generate_html(json_data)
+        toots.append({"toot":json.loads(r.read()), "domain":toot_url[2]})
+
+from jinja2 import Environment, FileSystemLoader
+env = Environment(loader=FileSystemLoader('./', encoding='utf8'))
+template = env.get_template("template.html")
+
+ticket = template.render(info=info, toots=toots)
+with open("out.html", "w") as f:
+    f.write(ticket)
+
+#from jinja2 import Environment, PackageLoader, select_autoescape
+#env = Environment(
+#    loader=PackageLoader("yourapp"),
+#    autoescape=select_autoescape())

@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #191b22;
+}
+a { text-decoration: none; }
+
+header {
+    width: 480px;
+    background-color: #282c37;
+    color: #fff;
+    margin: 0 auto;
+    padding: 10px;
+    border-bottom: 1px solid #393f4f;
+}
+h1 {
+    padding: 0 10px;
+}
+header .author {
+    padding: 0 10px;
+    font-size: 13px;
+}
+header .moment-update {
+    padding: 0 10px;
+    font-size: 13px;
+    text-align: right;
+}
+header .author a {
+    color: #fff;
+}
+header .author img {
+    height: 13px;
+}
+header .description {
+    padding: 0 10px;
+}
+
+.momentoot-outer {
+    width: 480px;
+    background-color: #282c37;
+    color: #fff;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+article {
+    position: relative;
+    font: 15px sans-serif;
+    border-bottom: 1px solid #393f4f;
+    padding: 10px;
+}
+article img {
+    max-width: 460px;
+}
+.user-icon {
+    color: #606984;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 48px;
+    height: 48px;
+}
+.profile { color: #606984; padding-left: 58px; padding-bottom: 10px; }
+.display_name { color: #fff; font-weight: bold; }
+.display_name:hover  { text-decoration: underline; color:#fff; }
+.created_at { align: right; color: #606984; }

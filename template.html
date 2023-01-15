@@ -1,36 +1,47 @@
-<!--適当にTogetterのデザインをパクった-->
-<style>
-a { text-decoration: none; }
-article {
-    position: relative;
-    font: 13px sans-serif;
-    padding-left: 53px;
-}
-.profile { color: #999; }
-.profile img {
-    position: absolute;
-    top: 5px;
-    left: 0px;
-    width: 48px;
-    height: 48px;
-}
-.acct { font-size: 12px; margin-left: 1em; }
-.created_at { font-size: 12px; align: right; color: #999; }
-</style>
-
-<article>
-    <div>
-        <a class="profile" href="{{ item.account.url }}">
-            <img src="{{ item.account.icon }}" alt="{{ item.account.display_name }}">
-            <strong>{{ item.account.display_name }}</strong>
-            <span class="acct">@{{ item.account.acct }}@domain(JSONにドメインだけなくてだりー)</span>
-        </a>   
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>momentoot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>{{info.title}}</h1>
+        <span class="author">
+            <a href="{{info.author_url}}" target="_blank" rel="noopener">
+            <img src="{{info.author_icon}}">
+            {{info.author}}
+            </a>
+        </span>
+        <span class="moment-update">{{info.last_update}}</span>
+        <p class="description">
+        {{info.description}}
+        </p>
+    </header>
+    <div class="momentoot-outer">
+{% for item in toots %}
+        <article>
+            <div>
+                <a href="{{ item.toot.account.url }}">
+                    <img class="user-icon" src="{{ item.toot.account.avatar }}" alt="{{ item.toot.account.display_name }}">
+                    <div class="profile">
+                        <div class="display_name">{{ item.toot.account.display_name }}</div>
+                        <div class="acct">@{{ item.toot.account.acct }}@{{ item.domain }}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="toot-body">
+                {{ item.toot.content }}
+                {% for i in item.toot.media_attachments %}
+                <div class="image">
+                    <a href="{{ i.url }}"><img src="{{ i.preview_url }}" alt={{ i.description }}></a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="created_at">{{ item.toot.created_at }}</div>
+        </article>
+{% endfor %}
     </div>
-    {{ item.content }}
-    {% for i in item.media_attachments %}
-    <div class="image">
-        <a href="{{ i.url }}"><img src="{{ i.preview_url }}" alt={{ i.description }}></a>
-    </div>
-    {% endfor %}
-    <div class="created_at">{{ item.created_at }}</div>
-</article>
+</body>
+</html>
