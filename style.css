@@ -35,6 +35,17 @@ header .description {
     padding: 0 10px;
 }
 
+footer {
+    width: 480px;
+    background-color: #282c37;
+    color: #fff;
+    font-size: 13px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+footer a { color: #fff; text-decoration: underline; }
+
 .momentoot-outer {
     width: 480px;
     background-color: #282c37;
